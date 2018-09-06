@@ -1,5 +1,5 @@
 resource "aws_guardduty_detector" "master" {
-  enable = "{var.enable}"
+  enable = "${var.enable}"
 }
 
 resource "aws_s3_bucket_object" "MyThreatIntelSet" {

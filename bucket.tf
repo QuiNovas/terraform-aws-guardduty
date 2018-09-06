@@ -18,7 +18,6 @@ resource "aws_s3_bucket" "guard_duty_lists" {
       }
     }
   }
-  tags   = "${local.tags}"
   versioning {
     enabled = true
   }
