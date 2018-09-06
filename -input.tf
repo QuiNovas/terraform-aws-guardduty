@@ -9,7 +9,7 @@ variable "threat_intel_set_active" {
 
 variable "threat_intel_set_format" {
   default = "TXT"
-  type        = "string"
+  type    = "string"
 }
 
 variable "ip_set_active" {
@@ -18,12 +18,12 @@ variable "ip_set_active" {
 
 variable "ip_set_format" {
   default = "TXT"
-  type        = "string"
+  type    = "string"
 }
 
 variable "enable" {
   description = "Enable/Disable guardduty.You can set the enable attribute to false for suspend monitoring and feedback reporting while keeping existing data."
-  default = true
+  default     = true
 }
 
 variable "log_bucket" {
@@ -31,11 +31,11 @@ variable "log_bucket" {
 }
 
 variable "threat_intel_list" {
-  default = []
-  type    = "list"
+  default = ""
+  type    = "string"
 }
 
 variable "ip_set_list" {
-  default = []
-  type    = "list"
+  default = ""
+  type    = "string"
 }
