@@ -1,3 +1,7 @@
+data "aws_s3_bucket" "log_bucket" {
+  bucket = "${var.log_bucket}"
+}
+
 resource "aws_s3_bucket" "guard_duty_lists" {
   bucket = "${var.account_name}-guardduty-lists"
   lifecycle {
@@ -5,7 +9,7 @@ resource "aws_s3_bucket" "guard_duty_lists" {
   }
   logging {
     target_bucket = "${data.aws_s3_bucket.log_bucket.id}"
-    target_prefix = "s3/${var.distribution_name}/"
+    target_prefix = "s3/guard_duty/"
   }
   server_side_encryption_configuration {
     rule {
