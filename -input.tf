@@ -23,8 +23,7 @@ variable "ip_set_format" {
 
 variable "enable" {
   description = "Enable/Disable guardduty.You can set the enable attribute to false for suspend monitoring and feedback reporting while keeping existing data."
-  type = "string"
-  default = "true"
+  default = true
 }
 
 variable "log_bucket" {
