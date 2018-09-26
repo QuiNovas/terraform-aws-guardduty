@@ -6,36 +6,47 @@ variable "account_name" {
 variable "enable" {
   description = "Enable/Disable guardduty.You can set the enable attribute to false for suspend monitoring and feedback reporting while keeping existing data."
   default     = true
+  type        = "string"
 }
 
 variable "ip_set_active" {
-  default = true
+  description = ""
+  default     = true
+  type        = "string"
 }
 
 variable "ip_set_format" {
-  default = "TXT"
-  type    = "string"
+  description = ""
+  default     = "TXT"
+  type        = "string"
 }
 
 variable "ip_set_list" {
-  default = ""
-  type    = "string"
+  description = ""
+  default     = ""
+  type        = "string"
 }
 
 variable "log_bucket" {
-  type = "string"
+  description = ""
+  type        = "string"
+  type        = "string"
 }
 
 variable "threat_intel_set_active" {
-  default = true
+  description = ""
+  default     = true
+  type        = "string"
 }
 
 variable "threat_intel_set_format" {
-  default = "TXT"
-  type    = "string"
+  description = ""
+  default     = "TXT"
+  type        = "string"
 }
 
 variable "threat_intel_list" {
-  default = ""
-  type    = "string"
+  description = ""
+  default     = ""
+  type        = "string"
 }

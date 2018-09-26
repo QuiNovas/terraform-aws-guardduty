@@ -1,7 +1,9 @@
-output "id" {
-  value = "${aws_guardduty_detector.master.id}"
+output "account_id" {
+  description = ""
+  value       = "${aws_guardduty_detector.master.account_id}"
 }
 
-output "account_id" {
-  value = "${aws_guardduty_detector.master.account_id}"
+output "id" {
+  description = ""
+  value       = "${aws_guardduty_detector.master.id}"
 }
