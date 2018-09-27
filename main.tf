@@ -17,7 +17,7 @@ resource "aws_guardduty_threatintelset" "MyThreatIntelSet" {
 }
 
 resource "aws_s3_bucket_object" "MyIPSet" {
-  content = "${var.threat_intel_list}"
+  content = "${var.ip_set_list}"
   bucket  = "${aws_s3_bucket.guard_duty_lists.id}"
   key     = "MyIPSet"
 }
