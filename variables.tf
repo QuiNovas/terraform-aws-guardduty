@@ -21,9 +21,8 @@ variable "ip_set_format" {
   type        = "string"
 }
 
-variable "ip_set_list" {
-  description = "List of the IP's, the content of the MyIPSet that will uploaded to s3 bucket"
-  default     = ""
+variable "ip_set_list_path" {
+  description = "The path of the IP safe list file"
   type        = "string"
 }
 
@@ -44,8 +43,8 @@ variable "threat_intel_set_format" {
   type        = "string"
 }
 
-variable "threat_intel_list" {
-  description = "List of the IP's, the content of the MyThreatIntelSet that will uploaded to s3 bucket"
+variable "threat_intel_list_path" {
+  description = "The path of the Thread intel file"
   default     = ""
   type        = "string"
 }
