@@ -44,7 +44,6 @@ variable "threat_intel_set_format" {
 }
 
 variable "threat_intel_list_path" {
-  description = "The path of the Thread intel file"
-  default     = ""
+  description = "The path of the Threat intel file"
   type        = "string"
 }
