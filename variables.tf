@@ -9,6 +9,27 @@ variable "enable" {
   type        = "string"
 }
 
+variable "member_list" {
+  description = "The list of member accounts to be added. Each member list need to have values of account_id, member_email and invite boolean"
+  type        = "list"
+  default     = []
+}
+
+#example
+#[
+#    {
+#      account_id = "12345678913"
+#      member_email = "email@email.com"
+#      invite = "true"
+#    }
+#  ]
+
+variable "member_list_count" {
+  description = "The count of members to be added to this master guard duty"
+  type        = "string"
+  default     = 0
+}
+
 variable "ip_set_active" {
   description = "Specifies whether GuardDuty is to start using the uploaded IPSet"
   default     = true
