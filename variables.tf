@@ -9,6 +9,27 @@ variable "enable" {
   type        = "string"
 }
 
+variable "member_list" {
+  description = "The list of member accounts to be added. Each member list need to have values of account_id, member_email and invite boolean"
+  type        = "list"
+  default     = []
+}
+
+#example
+#[
+#    {
+#      account_id = "12345678913"
+#      member_email = "email@email.com"
+#      invite = "true"
+#    }
+#  ]
+
+variable "member_list_count" {
+  description = "The count of members to be added to this master guard duty"
+  type        = "string"
+  default     = 0
+}
+
 variable "ip_set_active" {
   description = "Specifies whether GuardDuty is to start using the uploaded IPSet"
   default     = true
@@ -21,9 +42,8 @@ variable "ip_set_format" {
   type        = "string"
 }
 
-variable "ip_set_list" {
-  description = "List of the IP's, the content of the MyIPSet that will uploaded to s3 bucket"
-  default     = ""
+variable "ip_set_list_path" {
+  description = "The path of the IP safe list file"
   type        = "string"
 }
 
@@ -44,8 +64,7 @@ variable "threat_intel_set_format" {
   type        = "string"
 }
 
-variable "threat_intel_list" {
-  description = "List of the IP's, the content of the MyThreatIntelSet that will uploaded to s3 bucket"
-  default     = ""
+variable "threat_intel_list_path" {
+  description = "The path of the Threat intel file"
   type        = "string"
 }
