@@ -32,7 +32,13 @@ variable "member_list_count" {
 
 variable "ip_set_active" {
   description = "Specifies whether GuardDuty is to start using the uploaded IPSet"
-  default     = true
+  default     = false
+  type        = "string"
+}
+
+variable "pass_ip_set" {
+  description = "true if you are uploading the ip set file"
+  default     = false
   type        = "string"
 }
 
@@ -43,7 +49,8 @@ variable "ip_set_format" {
 }
 
 variable "ip_set_list_path" {
-  description = "The path of the IP safe list file"
+  description = "The path of the IP safe list file, must be set if pass_ip_set is true"
+  default     = ""
   type        = "string"
 }
 
@@ -52,9 +59,15 @@ variable "log_bucket" {
   type        = "string"
 }
 
+variable "pass_threat_set" {
+  description = "true if you are uploading the threat set file"
+  default     = false
+  type        = "string"
+}
+
 variable "threat_intel_set_active" {
   description = "Specifies whether GuardDuty is to start using the uploaded ThreatIntelSet"
-  default     = true
+  default     = false
   type        = "string"
 }
 
@@ -65,6 +78,7 @@ variable "threat_intel_set_format" {
 }
 
 variable "threat_intel_list_path" {
-  description = "The path of the Threat intel file"
+  description = "The path of the Threat intel file, must be set if pass_threat_set is true"
+  default     = ""
   type        = "string"
 }
