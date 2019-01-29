@@ -36,12 +36,6 @@ variable "ip_set_active" {
   type        = "string"
 }
 
-variable "pass_ip_set" {
-  description = "true if you are uploading the ip set file"
-  default     = false
-  type        = "string"
-}
-
 variable "ip_set_format" {
   description = "The format of the file that contains the IPSet. Valid values: TXT | STIX | OTX_CSV | ALIEN_VAULT | PROOF_POINT | FIRE_EYE"
   default     = "TXT"
@@ -49,19 +43,13 @@ variable "ip_set_format" {
 }
 
 variable "ip_set_list_path" {
-  description = "The path of the IP safe list file, must be set if pass_ip_set is true"
+  description = "The path of the IP safe list file"
   default     = ""
   type        = "string"
 }
 
 variable "log_bucket" {
   description = "Account level Log bucket id"
-  type        = "string"
-}
-
-variable "pass_threat_set" {
-  description = "true if you are uploading the threat set file"
-  default     = false
   type        = "string"
 }
 
@@ -78,7 +66,7 @@ variable "threat_intel_set_format" {
 }
 
 variable "threat_intel_list_path" {
-  description = "The path of the Threat intel file, must be set if pass_threat_set is true"
+  description = "The path of the Threat intel file"
   default     = ""
   type        = "string"
 }

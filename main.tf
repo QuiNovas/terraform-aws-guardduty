@@ -3,7 +3,7 @@ resource "aws_guardduty_detector" "master" {
 }
 
 resource "aws_s3_bucket_object" "MyThreatIntelSet" {
-  count  = "${var.pass_threat_set}"
+  count  = "${var.threat_intel_list_path == "" ? 0 : 1}"
   bucket = "${aws_s3_bucket.guard_duty_lists.id}"
   key    = "MyThreatIntelSet.txt"
   source = "${var.threat_intel_list_path}"
@@ -11,7 +11,7 @@ resource "aws_s3_bucket_object" "MyThreatIntelSet" {
 }
 
 resource "aws_guardduty_threatintelset" "MyThreatIntelSet" {
-  count       = "${var.pass_threat_set}"
+  count       = "${var.threat_intel_list_path== "" ? 0 : 1}"
   activate    = "${var.threat_intel_set_active}"
   detector_id = "${aws_guardduty_detector.master.id}"
   format      = "${var.threat_intel_set_format}"
@@ -20,7 +20,7 @@ resource "aws_guardduty_threatintelset" "MyThreatIntelSet" {
 }
 
 resource "aws_s3_bucket_object" "MyIPSet" {
-  count  = "${var.pass_ip_set}"
+  count  = "${var.ip_set_list_path == "" ? 0 : 1}"
   bucket = "${aws_s3_bucket.guard_duty_lists.id}"
   key    = "MyIPSet.txt"
   source = "${var.ip_set_list_path}"
@@ -28,7 +28,7 @@ resource "aws_s3_bucket_object" "MyIPSet" {
 }
 
 resource "aws_guardduty_ipset" "MyIPSet" {
-  count       = "${var.pass_ip_set}"
+  count       = "${var.ip_set_list_path == "" ? 0 : 1}"
   activate    = "${var.ip_set_active}"
   detector_id = "${aws_guardduty_detector.master.id}"
   format      = "${var.ip_set_format}"
