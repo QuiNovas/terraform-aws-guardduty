@@ -10,6 +10,7 @@ locals {
 }
 
 resource "aws_s3_bucket" "guard_duty_lists" {
+  count  = "${(var.threat_intel_list_path == "") || (var.ip_set_list_path == "")  ? 0 : 1}"
   bucket = "${local.account_name}-guardduty-lists"
 
   lifecycle {
@@ -61,8 +62,8 @@ data "aws_iam_policy_document" "guard_duty_lists" {
     }
 
     resources = [
-      "${aws_s3_bucket.guard_duty_lists.arn}",
-      "${aws_s3_bucket.guard_duty_lists.arn}/*",
+      "${element(concat(aws_s3_bucket.guard_duty_lists.*.arn, list("")), 0)}",
+      "${element(concat(aws_s3_bucket.guard_duty_lists.*.arn, list("")), 0)}/*",
     ]
 
     sid = "DenyUnsecuredTransport"
