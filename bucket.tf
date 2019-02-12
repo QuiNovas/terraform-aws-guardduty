@@ -1,9 +1,16 @@
+data "aws_caller_identity" "current" {}
+
+
 data "aws_s3_bucket" "log_bucket" {
   bucket = "${var.log_bucket}"
 }
 
+locals {
+  account_name = "${length(var.account_name) > 0 ? var.account_name : data.aws_caller_identity.current.account_id}"
+}
+
 resource "aws_s3_bucket" "guard_duty_lists" {
-  bucket = "${var.account_name}-guardduty-lists"
+  bucket = "${local.account_name}-guardduty-lists"
 
   lifecycle {
     prevent_destroy = true
