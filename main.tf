@@ -3,11 +3,12 @@ resource "aws_guardduty_detector" "master" {
 }
 
 resource "aws_s3_bucket_object" "MyThreatIntelSet" {
-  count  = "${var.threat_intel_list_path == "" ? 0 : 1}"
-  bucket = "${aws_s3_bucket.guard_duty_lists.id}"
-  key    = "MyThreatIntelSet.txt"
-  source = "${var.threat_intel_list_path}"
-  etag   = "${md5(file("${var.threat_intel_list_path}"))}"
+  count                  = "${var.threat_intel_list_path == "" ? 0 : 1}"
+  bucket                 = "${aws_s3_bucket.guard_duty_lists.id}"
+  key                    = "MyThreatIntelSet.txt"
+  source                 = "${var.threat_intel_list_path}"
+  etag                   = "${md5(file("${var.threat_intel_list_path}"))}"
+  server_side_encryption = "AES256"
 }
 
 resource "aws_guardduty_threatintelset" "MyThreatIntelSet" {
@@ -20,11 +21,12 @@ resource "aws_guardduty_threatintelset" "MyThreatIntelSet" {
 }
 
 resource "aws_s3_bucket_object" "MyIPSet" {
-  count  = "${var.ip_set_list_path == "" ? 0 : 1}"
-  bucket = "${aws_s3_bucket.guard_duty_lists.id}"
-  key    = "MyIPSet.txt"
-  source = "${var.ip_set_list_path}"
-  etag   = "${md5(file("${var.ip_set_list_path}"))}"
+  count                  = "${var.ip_set_list_path == "" ? 0 : 1}"
+  bucket                 = "${aws_s3_bucket.guard_duty_lists.id}"
+  key                    = "MyIPSet.txt"
+  source                 = "${var.ip_set_list_path}"
+  etag                   = "${md5(file("${var.ip_set_list_path}"))}"
+  server_side_encryption = "AES256"
 }
 
 resource "aws_guardduty_ipset" "MyIPSet" {
