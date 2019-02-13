@@ -8,7 +8,6 @@ resource "aws_s3_bucket_object" "MyThreatIntelSet" {
   key                    = "MyThreatIntelSet.txt"
   source                 = "${var.threat_intel_list_path}"
   etag                   = "${md5(file("${var.threat_intel_list_path}"))}"
-  server_side_encryption = "AES256"
 }
 
 resource "aws_guardduty_threatintelset" "MyThreatIntelSet" {
@@ -26,7 +25,6 @@ resource "aws_s3_bucket_object" "MyIPSet" {
   key                    = "MyIPSet.txt"
   source                 = "${var.ip_set_list_path}"
   etag                   = "${md5(file("${var.ip_set_list_path}"))}"
-  server_side_encryption = "AES256"
 }
 
 resource "aws_guardduty_ipset" "MyIPSet" {
