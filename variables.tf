@@ -52,6 +52,7 @@ variable "ip_set_list_path" {
 variable "log_bucket" {
   description = "Account level Log bucket id"
   type        = "string"
+  default = ""
 }
 
 variable "threat_intel_set_active" {
