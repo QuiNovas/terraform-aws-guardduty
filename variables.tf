@@ -1,3 +1,13 @@
+variable "accept_invite" {
+  description = "Accept invitation from a master account."
+  default     = false
+}
+
+variable "accepter_master_account_id" {
+  description = "Account ID for Guard Duty Master. Required if accept_invite = true"
+  default     = ""
+}
+
 variable "account_name" {
   description = "The account name. Used as a prefix to name resources."
   type        = "string"
@@ -71,15 +81,4 @@ variable "threat_intel_list_path" {
   description = "The path of the Threat intel file"
   default     = ""
   type        = "string"
-}
-
-
-variable "accept_invite" {
-  description = "Accept invitation from a master account."
-  default     = false
-}
-
-variable "accepter_master_account_id" {
-  description = "Account ID for Guard Duty Master. Required if accept_invite = true"
-  default = ""
 }
