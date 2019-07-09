@@ -37,7 +37,7 @@ resource "aws_guardduty_ipset" "MyIPSet" {
 }
 
 resource "aws_guardduty_member" "members" {
-  count              = var.member_list_count
+  count              = length(var.member_list)
   account_id         = var.member_list[count.index]["account_id"]
   detector_id        = aws_guardduty_detector.master.id
   email              = var.member_list[count.index]["member_email"]
