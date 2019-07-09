@@ -1,14 +1,3 @@
-data "aws_caller_identity" "current" {
-}
-
-locals {
-  bucket_creation_count = var.threat_intel_list_path == "" && var.ip_set_list_path == "" ? 0 : 1
-}
-
-data "aws_s3_bucket" "log_bucket" {
-  count  = local.bucket_creation_count && length(var.log_bucket) > 1 ? 1 : 0
-  bucket = var.log_bucket
-}
 
 resource "aws_s3_bucket" "guard_duty_lists" {
   count  = local.bucket_creation_count
@@ -37,6 +26,7 @@ resource "aws_s3_bucket" "guard_duty_lists" {
 }
 
 data "aws_iam_policy_document" "guard_duty_lists" {
+  count  = local.bucket_creation_count
   statement {
     actions = [
       "s3:*",
@@ -72,8 +62,8 @@ data "aws_iam_policy_document" "guard_duty_lists" {
 }
 
 resource "aws_s3_bucket_policy" "guard_duty_lists" {
-  count  = var.threat_intel_list_path == "" && var.ip_set_list_path == "" ? 0 : 1
+  count  = local.bucket_creation_count
   bucket = aws_s3_bucket.guard_duty_lists[0].id
-  policy = data.aws_iam_policy_document.guard_duty_lists.json
+  policy = data.aws_iam_policy_document.guard_duty_lists[0].json
 }
 

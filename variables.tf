@@ -21,24 +21,13 @@ variable "enable" {
 }
 
 variable "member_list" {
-  description = "The list of member accounts to be added. Each member list need to have values of account_id, member_email and invite boolean"
-  type        = list(string)
   default     = []
-}
-
-#example
-#[
-#    {
-#      account_id = "12345678913"
-#      member_email = "email@email.com"
-#      invite = "true"
-#    }
-#  ]
-
-variable "member_list_count" {
-  description = "The count of members to be added to this master guard duty"
-  type        = number
-  default     = 0
+  description = "The list of member accounts to be added. Each member list need to have values of account_id, member_email and invite boolean"
+  type = list(object({
+    account_id   = string
+    member_email = string
+    invite       = bool
+  }))
 }
 
 variable "ip_set_active" {
