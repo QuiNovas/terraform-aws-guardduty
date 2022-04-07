@@ -6,24 +6,33 @@ resource "aws_s3_bucket" "guard_duty_lists" {
   lifecycle {
     prevent_destroy = true
   }
+}
 
-  logging {
-    target_bucket = data.aws_s3_bucket.log_bucket[0].id
-    target_prefix = "s3/guard_duty/"
-  }
+resource "aws_s3_bucket_server_side_encryption_configuration" "guard_duty_lists_encryption" {
+  bucket = aws_s3_bucket.guard_duty_lists.bucket
 
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
-      }
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
     }
   }
+}
 
-  versioning {
-    enabled = true
+resource "aws_s3_bucket_versioning" "guard_duty_lists_versioning" {
+  bucket = aws_s3_bucket.guard_duty_lists.bucket
+
+  versioning_configuration {
+    status = "Enabled"
   }
 }
+
+resource "aws_s3_bucket_logging" "guard_duty_lists_logging" {
+  bucket = aws_s3_bucket.guard_duty_lists.bucket
+
+  target_bucket = data.aws_s3_bucket.log_bucket[0].id
+  target_prefix = "s3/guard_duty/"
+}
+
 
 data "aws_iam_policy_document" "guard_duty_lists" {
   count  = local.bucket_creation_count
@@ -66,4 +75,3 @@ resource "aws_s3_bucket_policy" "guard_duty_lists" {
   bucket = aws_s3_bucket.guard_duty_lists[0].id
   policy = data.aws_iam_policy_document.guard_duty_lists[0].json
 }
-
