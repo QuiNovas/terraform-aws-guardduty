@@ -9,6 +9,7 @@ resource "aws_s3_bucket" "guard_duty_lists" {
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "guard_duty_lists_encryption" {
+  count  = local.bucket_creation_count
   bucket = aws_s3_bucket.guard_duty_lists.0.bucket
 
   rule {
@@ -19,6 +20,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "guard_duty_lists_
 }
 
 resource "aws_s3_bucket_versioning" "guard_duty_lists_versioning" {
+  count  = local.bucket_creation_count
   bucket = aws_s3_bucket.guard_duty_lists.0.bucket
 
   versioning_configuration {
@@ -27,6 +29,7 @@ resource "aws_s3_bucket_versioning" "guard_duty_lists_versioning" {
 }
 
 resource "aws_s3_bucket_logging" "guard_duty_lists_logging" {
+  count  = local.bucket_creation_count
   bucket = aws_s3_bucket.guard_duty_lists.0.bucket
 
   target_bucket = data.aws_s3_bucket.log_bucket[0].id
